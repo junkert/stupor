@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+from sys import exit
+from optparse import OptionParser
+from stuper_lib.crawler import Crawler
+from stuper_lib.scheduler import Scheduler
+
+def opt_parse():
+    parser = OptionParser()
+    parser.add_option("-p",
+                      "--path",
+                      default=None,
+                      help="Path to crawl.")
+    parser.add_option("-o",
+                      "--output",
+                      default=None,
+                      help="Duplicate list file.")
+
+
+    (opts, args) = parser.parse_args()
+
+    if not opts.path and not opts.output:
+        parser.error("You must supply a path to crawl with -p and "
+                     "-o for duplicate list file.")
+    return parser.parse_args()
+
+
+def main():
+    opts, args = opt_parse()
+    crawler = Crawler(output=opts.output)
+    crawler.crawl(opts.path)
+    crawler.save()
+    return True
+
+if __name__ == "__main__":
+    # Change to BASH return codes:
+    # 0   -> True
+    # 1   -> False
+    # > 1 -> That value
+    val = main()
+    if val == 'False' or val == '0':
+        exit(1)
+    elif val == 'True' or val == '1':
+        exit(0)
+    else:
+        exit(int(val))
