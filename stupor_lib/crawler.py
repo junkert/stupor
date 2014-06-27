@@ -1,36 +1,31 @@
 import os
-import hashlib
+from subprocess import Popen, PIPE
 
 class Crawler(object):
-    def __init__(self, output='/tmp/duplicate_files.txt'):
-        self.duplicate_files = {}
-        self.hash_set = set()
-        self.output_file = output
+    def __init__(self):
         self.hash_size = 1024 * 1024 * 1 # 1 Megabyte(s)
-        pass
 
+    # Use find in linux shell to get file list
     def crawl(self, path):
+        file_list = []
+        find_cmd = ["find", path, "-type", "f", "-print"]
+        proc = Popen(find_cmd, stdout=PIPE)
+        (stdout, stderr) = proc.communicate()
+        file_list = (str(stdout).
+                         lstrip("b'").
+                         rstrip("'").
+                         split("\\n"))
+        return file_list
+
+    # This is a slow version. Super inefficient
+    def crawl_path(self, path):
+        file_list = []
         for root, dirs, files in os.walk(path):
             for dir in dirs:
                 self.crawl(os.path.join(root, dir))
             for file in files:
-                self._hash_file(os.path.join(root, file))
-
-    def save(self):
-        f = open(self.output_file, 'w')
-        for dup in self.duplicate_files:
-            if len(self.duplicate_files[dup]) > 1:
-                f.write("%s\t%s\n" % (dup, self.duplicate_files[dup]))
-        f.close()
-
-    def _hash_file(self, file_path):
-        f = open(file_path, 'rb+')
-        file_hash = hashlib.md5(f.read(self.hash_size)).hexdigest()
-        f.close()
-        if file_hash not in self.hash_set:
-            self.hash_set.add(file_hash)
-            self.duplicate_files[file_hash] = [file_path]
-        else:
-            if file_path not in self.duplicate_files[file_hash]:
-                self.duplicate_files[file_hash].append(file_path)
-
+                if os.path.join(root, file) == root:
+                    return
+                if os.path.isfile(os.path.join(root, file)):
+                    file_list.add(os.path.join(root, file))
+        return file_list
