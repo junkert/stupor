@@ -1,6 +1,0 @@
-d05cefd5172ea55ce145ea65188c3f4e	['./stuper_lib/__pycache__/scheduler.cpython-34.pyc', './stuper_lib2/__pycache__/scheduler.cpython-34.pyc']
-73c4663c426c6aa405d265a088460eef	['./stuper_lib/__pycache__/crawler.cpython-34.pyc', './stuper_lib2/__pycache__/crawler.cpython-34.pyc']
-38d854b4c2f2f113a6ced2d8b0ce689e	['./stuper_lib/__pycache__/__init__.cpython-34.pyc', './stuper_lib2/__pycache__/__init__.cpython-34.pyc']
-d48fde8d5909446cdc1b7de9914e1994	['./stuper_lib/scheduler.py', './stuper_lib2/scheduler.py']
-f13ff6dfc0afbab53d31f5a6393bae74	['./stuper_lib/crawler.py', './stuper_lib2/crawler.py']
-3cf5d81e6e99b038bd0d90e3cabd06c6	['./stuper_lib/__init__.py', './stuper_lib2/__init__.py']
