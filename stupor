@@ -38,7 +38,8 @@ def opt_parse():
     (opts, args) = parser.parse_args()
 
     if not opts.path and not opts.output:
-        parser.error("Please add a -p and -o flag when executing. -h fpip install -U memory_profileror help")
+        parser.error("Please add a -p and -o flag when executing or -h for "
+                     "help.")
     return parser.parse_args()
 
 def hash(file_path):
@@ -69,6 +70,7 @@ def main():
     file_list = crawler.crawl(opts.path)
     crawler_time = time.time() - start_time
     print("Crawler time: %f seconds" % crawler_time)
+
     # Now execute in parallel MD5 jobs.
     # concurrency = 1 file : 1 process.
     duplicate_time = time.time()
@@ -81,31 +83,34 @@ def main():
                 if not file_hash or not file_path:
                     continue
                 # Used to debug threads
-                #print("%s\n%s\n\n" % (file_hash, file_path))
+                # print("%s\n%s\n\n" % (file_hash, file_path))
                 if file_hash not in duplicate_files:
                     duplicate_files[file_hash] = [file_path]
                 else:
                     duplicate_files[file_hash].append(file_path)
+
+        # TODO: Find out why this exception is being thrown
         except IsADirectoryError as e:
             pass
+
     print("Duplicate detect time: %f seconds" % (time.time() - duplicate_time))
     # Write to output file
     counter = 0
     with open(opts.output, 'w') as f:
         for row in duplicate_files:
             if len(duplicate_files[row]) > 1:
-                counter +=1
+                counter += 1
                 files = ','.join(duplicate_files[row])
                 f.write("%s,%s\n" % (row, files))
 
-    # Print stats to screen
+    # Print statistics to screen
     stop_time = time.time()
     duration = stop_time - start_time
     print("")
     print("Number of files: %d" % len(file_list))
     print("Stop time: %s" % str(datetime.now()))
     print("Duplicate file count: %d" % counter)
-    print("Duration: %f" % duration)
+    print("Total Runtime: %f" % duration)
     return True
 
 if __name__ == "__main__":

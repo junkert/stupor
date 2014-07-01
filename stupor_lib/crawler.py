@@ -3,7 +3,7 @@ from subprocess import Popen, PIPE
 
 class Crawler(object):
     def __init__(self):
-        self.hash_size = 1024 * 1024 * 1 # 1 Megabyte(s)
+        pass
 
     # Use find in linux shell to get file list
     def crawl(self, path):
