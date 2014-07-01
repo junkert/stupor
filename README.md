@@ -35,7 +35,7 @@ be a duplicate file.
 
 Computational & Data Model
 ==========================
-![alt tag](https://github.com/junkert/stupor/blob/master/Docs/images/compute_and_data_model.png)
+![alt tag](https://raw.githubusercontent.com/junkert/stupor/master/Docs/images/compute_and_data_model.png)
 
 Requirements
 ============
