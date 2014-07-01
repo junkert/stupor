@@ -66,13 +66,14 @@ These calculations were done on my home PC. Right now it takes about 48 minutes 
 
 Configuration:
 
-PART       | Descrition
-------------------------------
-**CPU**        | Intel Core i7 (3770K) CPU
-**RAM**        | 16GB DDR3-800 (non-ecc)
-**DISK**       | 3x2TB 6Gb/s 7200RPM drives 8MB Cache
-**FILE SYSTEM**| BTRFS's RAID-0 option, LZO compression, proper alignment with 4iKB stripe size
-**FS OPTIONS** | compress=lzo,autodefrag,fatal_errors=bug,skip_balance,thread_pool=4
+| PART            | Descrition
+| --------------- | ------------------------------------------------------------------------------ |
+| **CPU**         | Intel Core i7 (3770K) CPU                                                      |
+| **RAM**         | 16GB DDR3-800 (non-ecc)                                                        |
+| **DISK**        | 3x2TB 6Gb/s 7200RPM drives 8MB Cache                                           |
+| **FILE SYSTEM** | BTRFS's RAID-0 option, LZO compression, proper alignment with 4KB stripe size  |
+| **FS OPTIONS**  | compress=lzo,autodefrag,fatal_errors=bug,skip_balance,thread_pool=4            |
+| ------------------------------------------------------------------------------------------------ |
 
 Runtime:
 ```
