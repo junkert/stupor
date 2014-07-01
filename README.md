@@ -66,7 +66,7 @@ These calculations were done on my home PC. Right now it takes about 48 minutes 
 
 Configuration:
 
-| PART       | Descrition
+PART       | Descrition
 ------------------------------
 **CPU**        | Intel Core i7 (3770K) CPU
 **RAM**        | 16GB DDR3-800 (non-ecc)
