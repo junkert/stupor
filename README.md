@@ -73,7 +73,6 @@ Configuration:
 | **DISK**        | 3x2TB 6Gb/s 7200RPM drives 8MB Cache                                           |
 | **FILE SYSTEM** | BTRFS's RAID-0 option, LZO compression, proper alignment with 4KB stripe size  |
 | **FS OPTIONS**  | compress=lzo,autodefrag,fatal_errors=bug,skip_balance,thread_pool=4            |
-| ------------------------------------------------------------------------------------------------ |
 
 Runtime:
 ```
