@@ -42,7 +42,6 @@ Requirements
 
 Python >= 3.4
 
-
 Examples
 ========
 
@@ -54,3 +53,40 @@ Set thread count to 16 (default is 4):
 
 Defaults:
 ./stupor -p /tmp -o ~/duplicates.txt
+
+Runtime Tests
+=============
+These calculations were done on my home PC. Right now it takes about 48 minutes to complete on 3.1TB of data that is ~17% replicated. See below for example runtime numbers:
+
+Configuration:
+```
+CPU: Intel Core i7 (3770K) CPU
+RAM: 16GB DDR3-800 (non-ecc)
+DISK: 3x2TB 6Gb/s 7200RPM drives 8MB Cache
+FILE SYSTEM: BTRFS's RAID-0 option, LZO compression, proper alignment with 4iKB stripe size
+FS-OPTIONS: compress=lzo
+            autodefrag
+            fatal_errors=bug
+            skip_balance
+            thread_pool=4
+```
+
+Runtime:
+```
+wonka stupor # time ./stupor -p /data/btrfs/ -t 8 -o output.txt
+Start time: 2014-06-23 23:58:53.770263
+
+Crawling filesystem and collecting a file list . . .
+Crawler time: 70.069773 seconds
+Identifying duplicates . . .
+Duplicate detect time: 2835.133265 seconds
+
+Number of files: 473924
+Stop time: 2014-06-24 00:47:19.481615
+Duplicate file count: 80879
+Duration: 2905.711284
+
+real    48m26.211s
+user    8m59.681s
+sys     4m13.506s
+```
