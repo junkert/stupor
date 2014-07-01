@@ -33,6 +33,9 @@ there is only one path for a key then we assume there are no duplicates to this
 file. Therefore any key's value that has a length greater than one is assumed to
 be a duplicate file.
 
+Computational & Data Model
+==========================
+![alt tag](https://github.com/junkert/stupor/blob/master/Docs/images/compute_and_data_model.png)
 
 Requirements
 ============
