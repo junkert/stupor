@@ -6,20 +6,19 @@ from datetime import datetime
 from sys import exit
 from optparse import OptionParser
 from concurrent import futures
-from hashlib import md5
+from hashlib import sha3_512
 from stupor_lib.crawler import Crawler
 
 file_list = []
-chunk_size = 1 * 1024 * 1024
 
 def opt_parse():
     parser = OptionParser()
 
     parser.add_option("-c",
                       "--chunk",
-                      default=1,
+                      default=10,
                       type='int',
-                      help="Chunk size in MB. [DEFAULT: 1]")
+                      help="Chunk size in MB. [DEFAULT: 10]")
     parser.add_option("-p",
                       "--path",
                       default=None,
@@ -46,7 +45,7 @@ def hash(file_path):
     global chunk_size
     if os.path.exists(file_path):
         f = open(file_path, 'rb+')
-        file_hash = md5(f.read(chunk_size)).hexdigest()
+        file_hash = sha3_512(f.read(chunk_size)).hexdigest()
         f.close()
     else:
         file_hash = None
@@ -71,7 +70,7 @@ def main():
     crawler_time = time.time() - start_time
     print("Crawler time: %f seconds" % crawler_time)
 
-    # Now execute in parallel MD5 jobs.
+    # Now execute in parallel hashing jobs.
     # concurrency = 1 file : 1 process.
     duplicate_time = time.time()
     print("Identifying duplicates . . . ",)
